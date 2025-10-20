@@ -8,36 +8,40 @@ import Skills from "./skills/page";
 import Contact from "./contact/page";
 
 function Page() {
-  const aboutRef = useRef(null);
-  const servicesRef = useRef(null);
-  const skillsRef = useRef(null);
-  const contactRef = useRef(null); 
+  // ✅ Explicitly type refs so TypeScript knows they reference HTML elements
+  const aboutRef = useRef<HTMLElement | null>(null);
+  const servicesRef = useRef<HTMLElement | null>(null);
+  const skillsRef = useRef<HTMLElement | null>(null);
+  const contactRef = useRef<HTMLElement | null>(null);
 
   return (
     <>
+      {/* ✅ Pass refs safely */}
       <Header
         aboutRef={aboutRef}
         servicesRef={servicesRef}
         skillsRef={skillsRef}
-        contactRef ={contactRef} 
+        contactRef={contactRef}
       />
+
       <Hero />
 
-      <div ref={aboutRef}>
+      {/* ✅ Attach refs to wrapping <section> or <div> elements */}
+      <section ref={aboutRef}>
         <About />
-      </div>
+      </section>
 
-      <div ref={servicesRef}>
+      <section ref={servicesRef}>
         <Services />
-      </div>
+      </section>
 
-      <div ref={skillsRef}>
+      <section ref={skillsRef}>
         <Skills />
-      </div>
+      </section>
 
-      <div ref={contactRef}>
-        <Contact /> 
-      </div>
+      <section ref={contactRef}>
+        <Contact />
+      </section>
     </>
   );
 }

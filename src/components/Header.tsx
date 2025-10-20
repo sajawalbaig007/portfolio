@@ -2,17 +2,19 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 
+// ✅ Properly typed props (HTMLElement | null to match useRef)
 type HeaderProps = {
-  aboutRef: React.RefObject<HTMLElement>;
-  servicesRef: React.RefObject<HTMLElement>;
-  skillsRef: React.RefObject<HTMLElement>;
-  contactRef: React.RefObject<HTMLElement>;
+  aboutRef: React.RefObject<HTMLElement | null>;
+  servicesRef: React.RefObject<HTMLElement | null>;
+  skillsRef: React.RefObject<HTMLElement | null>;
+  contactRef: React.RefObject<HTMLElement | null>;
 };
 
 function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
-  const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
+  // ✅ Scroll to a section smoothly with slight offset
+  const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
     if (ref?.current) {
       const topOffset =
         ref.current.getBoundingClientRect().top + window.scrollY - 100;
@@ -21,6 +23,7 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
     }
   };
 
+  // ✅ Scroll to top (home)
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setOpen(false);
@@ -28,12 +31,14 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
 
   return (
     <>
+      {/* ✅ Navbar */}
       <header className="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-lg z-50 overflow-x-hidden">
         <div className="flex justify-between items-center px-4 py-4 md:px-6 w-full max-w-full">
           <h1 className="text-2xl md:text-3xl font-semibold text-[#2fc2e3] whitespace-nowrap">
             Sajawal Baig
           </h1>
 
+          {/* ✅ Mobile Menu Icon */}
           <div
             className="md:hidden pr-10 cursor-pointer"
             onClick={() => setOpen(!open)}
@@ -41,6 +46,7 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
             {open ? <X size={26} /> : <Menu size={26} />}
           </div>
 
+          {/* ✅ Desktop Nav */}
           <nav className="hidden md:flex items-center pr-20 gap-6 lg:gap-8">
             <span
               onClick={scrollToTop}
@@ -76,6 +82,7 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
           </nav>
         </div>
 
+        {/* ✅ Mobile Nav */}
         {open && (
           <nav className="flex flex-col items-center gap-4 py-4 bg-gray-900 border-t border-gray-700 w-full overflow-x-hidden">
             <span
@@ -113,6 +120,7 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
         )}
       </header>
 
+      {/* ✅ Spacer so content doesn’t hide behind fixed header */}
       <div className="h-[80px] md:h-[100px]"></div>
     </>
   );
