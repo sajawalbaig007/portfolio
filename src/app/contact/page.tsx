@@ -4,7 +4,6 @@ import {
   FaEnvelope,
   FaPhoneAlt,
   FaMapMarkerAlt,
-  FaFacebook,
   FaLinkedin,
   FaGithub,
   FaWhatsapp,

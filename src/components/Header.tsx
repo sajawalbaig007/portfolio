@@ -2,10 +2,17 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-function Header({ aboutRef, servicesRef, skillsRef, contactRef }) {
+type HeaderProps = {
+  aboutRef: React.RefObject<HTMLElement>;
+  servicesRef: React.RefObject<HTMLElement>;
+  skillsRef: React.RefObject<HTMLElement>;
+  contactRef: React.RefObject<HTMLElement>;
+};
+
+function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
-  const scrollToSection = (ref) => {
+  const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
     if (ref?.current) {
       const topOffset =
         ref.current.getBoundingClientRect().top + window.scrollY - 100;
@@ -34,7 +41,6 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }) {
             {open ? <X size={26} /> : <Menu size={26} />}
           </div>
 
-
           <nav className="hidden md:flex items-center pr-20 gap-6 lg:gap-8">
             <span
               onClick={scrollToTop}
@@ -61,7 +67,6 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }) {
               Skills
             </span>
 
-          
             <button
               onClick={() => scrollToSection(contactRef)}
               className="bg-[#0591b0] hover:bg-[#04859f] transition text-white rounded-3xl text-sm md:text-base px-5 py-2 whitespace-nowrap"
@@ -98,7 +103,6 @@ function Header({ aboutRef, servicesRef, skillsRef, contactRef }) {
               Skills
             </span>
 
-       
             <button
               onClick={() => scrollToSection(contactRef)}
               className="bg-[#0591b0] hover:bg-[#04859f] transition text-white rounded-3xl text-sm px-5 py-2"

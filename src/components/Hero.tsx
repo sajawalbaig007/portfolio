@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
-import { link } from "fs";
+
 
 function Hero() {
   const roles = [
@@ -14,11 +14,12 @@ function Hero() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
+  const interval = setInterval(() => {
+    setIndex((prev) => (prev + 1) % roles.length);
+  }, 2500);
+  return () => clearInterval(interval);
+}, [roles.length]);
+
 
   return (
     <>
