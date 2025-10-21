@@ -142,7 +142,7 @@ function Hero() {
           viewport={{ once: true }}
           className="hidden md:block rounded-full border-4 border-[#2fc2e3] h-80 w-80 object-cover 
           object-[50%_30%] absolute right-24 top-24"
-          src="Images/profile pic.jpg"
+          src="Images/profilepic.jpg"
           alt="Sajawal Baig"
         />
       </div>
