@@ -127,12 +127,12 @@ function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col md:flex-row gap-4 my-8"
           >
-            {/* <button className="bg-[#2fc2e3] text-white text-lg px-6 py-3 rounded-xl hover:bg-[#1daec8] transition">
-              More About Me
-            </button> */}
-            <button className="bg-transparent text-white text-lg px-6 py-3 rounded-xl border border-4 border-[#2fc2e3] transition">
-              Download CV
-            </button>
+            <a href="/sajawal-cv.pdf" download="/sajawal-cv.pdf"
+  className="bg-transparent text-white text-lg px-6 py-3 rounded-xl border border-4 border-[#2fc2e3] hover:bg-[#2fc2e3] hover:text-black transition text-center"
+>
+  Download CV
+</a>
+
           </motion.div>
         </div>
         <motion.img
@@ -140,8 +140,9 @@ function Hero() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
           viewport={{ once: true }}
-          className="hidden md:block rounded-full border-4 border-[#2fc2e3] h-80 w-80 object-cover absolute right-24 top-24"
-          src="Images/WhatsApp Image 2025-09-18 at 12.48.54_e28b6fa4.jpg"
+          className="hidden md:block rounded-full border-4 border-[#2fc2e3] h-80 w-80 object-cover 
+          object-[50%_30%] absolute right-24 top-24"
+          src="Images/profile pic.jpg"
           alt="Sajawal Baig"
         />
       </div>

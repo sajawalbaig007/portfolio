@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-// ✅ Properly typed props (HTMLElement | null to match useRef)
 type HeaderProps = {
   aboutRef: React.RefObject<HTMLElement | null>;
   servicesRef: React.RefObject<HTMLElement | null>;
@@ -13,7 +12,6 @@ type HeaderProps = {
 function Header({ aboutRef, servicesRef, skillsRef, contactRef }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
-  // ✅ Scroll to a section smoothly with slight offset
   const scrollToSection = (ref: React.RefObject<HTMLElement | null>) => {
     if (ref?.current) {
       const topOffset =
