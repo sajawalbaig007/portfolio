@@ -36,8 +36,9 @@ function Hero() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="relative z-10 rounded-full border-4 border-[#2fc2e3] h-40 w-40 object-cover mt-20 md:mt-6 md:hidden"
-          src="Images/WhatsApp Image 2025-09-18 at 12.48.54_e28b6fa4.jpg"
+          className="relative z-10 rounded-full border-4 border-[#2fc2e3] h-40 w-40 object-cover
+          object-[50%_30%] mt-20 md:mt-6 md:hidden"
+          src="Images/profilepic.jpg"
           alt="Sajawal Baig"
         />
 
