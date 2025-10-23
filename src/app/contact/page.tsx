@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import {
   FaEnvelope,
@@ -16,7 +17,8 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSending, setIsSending] = useState(false);
 
-  const sendEmail = async (e) => {
+  // ✅ FIXED: added proper type for event
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSending(true);
 
@@ -140,7 +142,9 @@ export default function Contact() {
               name="name"
               placeholder="Enter your name"
               value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setForm({ ...form, name: e.target.value })
+              }
               required
               className="px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500
                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
@@ -157,7 +161,9 @@ export default function Contact() {
               name="email"
               placeholder="Enter your email"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setForm({ ...form, email: e.target.value })
+              }
               required
               className="px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500
                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
@@ -173,7 +179,9 @@ export default function Contact() {
               name="message"
               placeholder="Write your message..."
               value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setForm({ ...form, message: e.target.value })
+              }
               required
               className="px-4 py-3 h-32 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 resize-none
                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
