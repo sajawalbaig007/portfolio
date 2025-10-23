@@ -9,8 +9,44 @@ import {
   FaWhatsapp,
   FaInstagram,
 } from "react-icons/fa";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [isSending, setIsSending] = useState(false);
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    try {
+      // 1️⃣ Send message to YOU
+      await emailjs.send(
+        "service_h0e2nwd", // service ID
+        "template_yd3gv95", // template for your inbox
+        form,
+        "YmnLO1jrkdhw_ycXX" // public key
+      );
+
+      // 2️⃣ Auto-reply to CUSTOMER
+      await emailjs.send(
+        "service_h0e2nwd", // same service
+        "template_m2tui91", // your auto-reply template ID
+        form,
+        "YmnLO1jrkdhw_ycXX"
+      );
+
+      alert("✅ Message sent successfully!");
+      setForm({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("❌ Failed to send message.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -27,7 +63,7 @@ export default function Contact() {
       </motion.h2>
 
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-12">
-
+        {/* LEFT SIDE INFO */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -85,46 +121,77 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        
+        {/* RIGHT SIDE FORM */}
         <motion.form
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: false, amount: 0.3 }}
-          className="bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6"
+          onSubmit={sendEmail}
+          className="bg-gray-800 p-8 rounded-2xl shadow-2xl space-y-6 border border-gray-700 w-full max-w-md mx-auto"
         >
-          <div>
-            <label className="block mb-2 text-gray-300">Your Name</label>
+          {/* Name Field */}
+          <div className="flex flex-col">
+            <label className="mb-2 text-gray-300 text-sm font-medium">
+              Your Name
+            </label>
             <input
               type="text"
+              name="name"
               placeholder="Enter your name"
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
+              className="px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500
+                     focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
             />
           </div>
 
-          <div>
-            <label className="block mb-2 text-gray-300">Your Email</label>
+          {/* Email Field */}
+          <div className="flex flex-col">
+            <label className="mb-2 text-gray-300 text-sm font-medium">
+              Your Email
+            </label>
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+              className="px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500
+                     focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
             />
           </div>
 
-          <div>
-            <label className="block mb-2 text-gray-300">Message</label>
+          {/* Message Field */}
+          <div className="flex flex-col">
+            <label className="mb-2 text-gray-300 text-sm font-medium">
+              Message
+            </label>
             <textarea
-              
+              name="message"
               placeholder="Write your message..."
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-            ></textarea>
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              required
+              className="px-4 py-3 h-32 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 resize-none
+                     focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500 transition-all"
+            />
           </div>
 
+          {/* Send Button */}
           <button
             type="submit"
-            className="w-full bg-cyan-400 text-black font-semibold py-2 rounded-full hover:bg-transparent hover:text-white border-2 border-cyan-400 transition"
+            disabled={isSending}
+            className={`w-full font-semibold py-3 rounded-full border-2 transition-all duration-300 shadow-md
+              ${
+                isSending
+                  ? "bg-gray-600 text-gray-300 border-gray-600 cursor-not-allowed"
+                  : "bg-cyan-400 text-black hover:bg-transparent hover:text-white border-cyan-400 hover:shadow-cyan-400/30"
+              }`}
           >
-            Send Message
+            {isSending ? "Sending..." : "Send Message"}
           </button>
         </motion.form>
       </div>
