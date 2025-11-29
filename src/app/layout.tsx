@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Bricolage_Grotesque } from "next/font/google";
-import Footer from "@/components/Footer";
-
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "600", "800"],
-});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,26 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sajawal's portfolio",
-  description: "Portfolio of Sajawal Baig",
-
-icons: {
+  title: "Umama portfolio",
+  description: "Portfolio of Umama Khan",
+  icons: {
     icon: "/logo.ico",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={bricolage.className}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <Footer />
       </body>
     </html>
   );
